@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Resumes and Job Description</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Resumes and Job Description</h1>
+        <form action="{{ url_for('upload_pdf') }}" method="post" enctype="multipart/form-data">
+            <label for="resumes">Select Resumes (multiple):</label>
+            <input type="file" name="resumes" id="resumes" multiple>
+            <label for="job">Select Job Description:</label>
+            <input type="file" name="job" id="job">
+            <input type="submit" value="Upload">
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash {% for category, message in messages %}{{ category }}{% endfor %}">
+                    {% for category, message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
